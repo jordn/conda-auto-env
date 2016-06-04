@@ -54,3 +54,10 @@ function conda_auto_env_remote() {
 }
 
 export PROMPT_COMMAND=conda_auto_env_remote
+
+# PROMPT_COMMAND is bash magic variable which is  executed as just before
+# Bash displays a prompt.
+
+# ZSH doesn't do this, but we can use the precmd hook to emulate it.
+prmptcmd() { eval "$PROMPT_COMMAND" }
+precmd_functions=(prmptcmd)
